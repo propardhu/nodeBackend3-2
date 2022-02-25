@@ -4,15 +4,8 @@ var router = express.Router();
 /* GET home page. */
 router.post('/', function(req, res, next) {
   console.log(req.body);
-  var email = "";
-  var name = "";
-  if(req.body.action == 'thumbs_up'){
-    email = "swapnithpindi1@gmail.com";
-    name = "swapnith";
-  }else{
-    email = "macharlaranjith71@gmail.com"
-    name = "ranjith";
-  }
+  var email = req.body.email;
+  var name = email.split("@")[0];
   const mailjet = require ('node-mailjet')
 .connect('ab7bf40ef737993df803847be1b37660', '19bed21a2c04bb0e3bb1d27878a04e84')
 const request = mailjet
@@ -31,8 +24,8 @@ const request = mailjet
         }
       ],
       "Subject": "Greetings from Pardhu.",
-      "TextPart": "Hello "+req.body.action+" occured",
-      "HTMLPart": "<h1>Hello " +name+ " pardhu just now "+req.body.action+" in the pressence of camera</h1>",
+      "TextPart": "Hello there are few objects in the presence of camara",
+      "HTMLPart": "<h4>Hello " +name+ " there are <br>"+JSON.stringify(req.body.action)+"<br> in the pressence of camera</h4>",
       "CustomID": "3-2 project"
     }
   ]
